@@ -1,0 +1,54 @@
+interface Props extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size"> {
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  required: boolean;
+  error: string;
+  width?: "sm" | "md" | "lg";
+  options: string[];
+}
+
+const Select = ({
+  name,
+  width = "md",
+  value,
+  onChange,
+  required,
+  error,
+  options,
+  ...props
+}: Props) => {
+  const baseClasses =
+    "block text-black placeholder-gray-400 text-sm transition-all duration-200 border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600";
+  const sizeClasses = {
+    sm: "px-3 py-2 text-sm",
+    md: "px-4 py-3 text-base",
+    lg: "px-5 py-3.5 text-lg",
+  };
+
+  return (
+    <div className='flex flex-col gap-2'>
+      <select
+        name={name}
+        value={value}
+        onChange={onChange}
+        required={required}
+        className={`${baseClasses} ${sizeClasses[width]} ${error ? "border-red-500" : ""}`}
+        {...props}
+      >
+        <option className='text-sm' value=''>
+          Select
+        </option>
+        {options &&
+          options.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+      </select>
+      {error && <span className='text-sm text-red-600'>{error}</span>}
+    </div>
+  );
+};
+
+export default Select;
