@@ -1,3 +1,4 @@
+import React from "react";
 import Containe from "@/components/core/Containe";
 import ProductsList from "@/components/ProductsList";
 

@@ -1,34 +1,35 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Table } from "@/components/ui";
 import { deleteDocument, getDocuments } from "@/lib/http";
 import { Routes } from "@/lib/routes";
 import { useRouter } from "next/navigation";
 import { GridColDef } from "@mui/x-data-grid";
 import Image from "next/image";
-import { ProductType } from "@/@interfaces/product";
+import { ProductAPI, ProductType } from "@/@interfaces/product";
 
-const page: React.FC = () => {
+const Page: React.FC = () => {
   const [data, setData] = useState<ProductType[]>([]);
   const router = useRouter();
 
   const fetchData = () => {
-    getDocuments("products").then((res: any) => {
+    getDocuments("products").then((res: ProductAPI[]) => {
       setData(
         res
-          ?.map((doc: any) => ({
+          ?.map((doc: ProductAPI) => ({
             id: doc.id,
             nameEN: doc.nameEN.stringValue || "f",
             nameAR: doc.nameAR?.stringValue || "",
             brand: doc.brand?.stringValue || "",
             category: doc.category?.stringValue || "",
             price: doc.price?.stringValue || "0",
+            createdAt: doc.createdAt?.stringValue || "",
             descriptionEN: doc.descriptionEN?.stringValue || "",
             descriptionAR: doc.descriptionAR?.stringValue || "",
             size: doc.size?.stringValue || "",
             image: doc.image?.stringValue || "",
           }))
-          .sort((a: any, b: any) => {
+          .sort((a: { createdAt: string }, b: { createdAt: string }) => {
             return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
           })
       );
@@ -121,4 +122,4 @@ const page: React.FC = () => {
   );
 };
 
-export default page;
+export default Page;
