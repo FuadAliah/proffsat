@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button, Dropzone, Select, Textarea, Input } from "@/components/ui";
 import { firestore, storage } from "@/firebaseConfig";
 import { addDoc, collection } from "@firebase/firestore";
@@ -11,11 +11,11 @@ import { Routes } from "@/lib/routes";
 import { ProductType } from "@/@interfaces/product";
 
 interface FileProps {
-  file: any;
+  file: File;
   preview: string;
 }
 
-const page: React.FC = () => {
+const Page: React.FC = () => {
   const router = useRouter();
 
   const [file, setFile] = useState<FileProps[]>([]);
@@ -183,4 +183,4 @@ const page: React.FC = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -1,3 +1,4 @@
+import React from "react";
 interface Props extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   name: string;
   value: string;

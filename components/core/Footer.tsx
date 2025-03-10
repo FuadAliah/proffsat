@@ -1,3 +1,4 @@
+import React from "react";
 const Footer: React.FC = () => {
   return (
     <section className='py-8 bg-white border-t border-gray-200'>
