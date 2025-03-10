@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useEffect, useState } from "react";
 import { ProductType } from "@/@interfaces/product";
 import DefualtImage from "@/components/DefualtImage";
@@ -22,7 +23,7 @@ type Props = {
   params: { id: string };
 };
 
-const page = ({ params }: Props) => {
+const Page = ({ params }: Props) => {
   const [product, setProduct] = useState<ProductType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { language } = useLanguage();
@@ -141,4 +142,4 @@ const page = ({ params }: Props) => {
   );
 };
 
-export default page;
+export default Page;

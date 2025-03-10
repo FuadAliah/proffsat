@@ -1,3 +1,4 @@
+import React from "react";
 import ProductsList from "@/components/ProductsList";
 import { Routes } from "@/lib/routes";
 import Link from "next/link";

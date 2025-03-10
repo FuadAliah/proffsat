@@ -11,3 +11,34 @@ export interface ProductType {
   price: string;
   category: string;
 }
+
+export interface ProductAPI {
+  map(
+    arg0: (doc: unknown) => {
+      id: string;
+      nameEN: string;
+      nameAR: string;
+      brand: string;
+      category: string;
+      price: string;
+      descriptionEN: string;
+      descriptionAR: string;
+      size: string;
+      image: string;
+    }
+  ): unknown;
+  id: string;
+  descriptionEN: { stringValue: string };
+  brand: { stringValue: string };
+  size: { stringValue: string };
+  image: { stringValue: string };
+  nameEN: { stringValue: string };
+  category: { stringValue: string };
+  createdAt: {
+    stringValue: string;
+    timestampValue: string;
+  };
+  price: { stringValue: string };
+  nameAR: { stringValue: string };
+  descriptionAR: { stringValue: string };
+}

@@ -7,7 +7,7 @@ export const checkDateHour = (date: string): string => {
   return diffInHours < 2 ? "new" : "";
 };
 
-export const checkDescription = (description: string): any => {
+export const checkDescription = (description: string): string | string[] => {
   return description.includes(",")
     ? description.split(",").map((item) => `- ${item.trim()}`)
     : `- ${description.trim()}`;

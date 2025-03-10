@@ -1,9 +1,10 @@
+import React from "react";
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
 
 type Props = {
   files: Array<{ preview: string }>;
-  setFiles: React.Dispatch<React.SetStateAction<Array<{ preview: string; file: any }>>>;
+  setFiles: React.Dispatch<React.SetStateAction<Array<{ preview: string; file: File }>>>;
 };
 
 const Dropzone = ({ files, setFiles }: Props) => {

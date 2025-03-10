@@ -1,3 +1,4 @@
+import React from "react";
 import Hero from "@/components/Hero";
 import Products from "@/sections/Products";
 import Footer from "@/components/core/Footer";
