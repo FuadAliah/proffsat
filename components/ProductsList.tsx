@@ -1,9 +1,9 @@
 "use client";
-import { ProductType } from "@/@interfaces/product";
+import React, { useEffect, useState } from "react";
+import { ProductAPI, ProductType } from "@/@interfaces/product";
 import Product from "@/components/Product";
 import useLoading from "@/hooks/useLoading";
 import { getDocuments } from "@/lib/http";
-import { useEffect, useState } from "react";
 
 type Props = {
   pageSize?: number;
@@ -18,7 +18,7 @@ const ProductsList: React.FC<Props> = ({ pageSize }: Props) => {
     try {
       const response = await getDocuments("products");
       const formattedProducts = response
-        .map((item: any) => ({
+        .map((item: ProductAPI) => ({
           id: item.id,
           descriptionEN: item.descriptionEN.stringValue,
           brand: item.brand.stringValue,
@@ -31,7 +31,7 @@ const ProductsList: React.FC<Props> = ({ pageSize }: Props) => {
           nameAR: item.nameAR.stringValue,
           descriptionAR: item.descriptionAR.stringValue,
         }))
-        .sort((a: any, b: any) => {
+        .sort((a: { createdAt: string }, b: { createdAt: string }) => {
           return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
         });
 

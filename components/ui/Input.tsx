@@ -1,3 +1,4 @@
+import React from "react";
 interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
   name: string;
   placeholder: string;
@@ -33,6 +34,7 @@ const Input = ({
       <input
         name={name}
         placeholder={placeholder}
+        type={type}
         value={value}
         onChange={onChange}
         required={required}

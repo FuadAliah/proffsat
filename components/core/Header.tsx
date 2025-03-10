@@ -1,10 +1,12 @@
 "use client";
+import React from "react";
 import { usePathname } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Nav from "./Nav";
 import Link from "next/link";
 import { auth } from "@/firebaseConfig";
 import { Routes } from "@/lib/routes";
+import Image from "next/image";
 
 const Header = () => {
   const [user] = useAuthState(auth);
@@ -15,11 +17,7 @@ const Header = () => {
       <nav aria-label='Global' className='w-full flex items-center justify-between'>
         <div className='flex gap-28 items-center'>
           <a href={Routes.HOME} className='flex flex-1 items-center'>
-            <img
-              alt=''
-              src='https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600'
-              className='h-8 min-w-10 w-auto'
-            />
+            <Image alt='' src='/logo.svg' className='h-8 min-w-10 w-auto' width={40} height={40} />
           </a>
           <ul className='text-indigo-600 text-sm'>
             {user && (

@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "./core/Header";
 
 const Hero: React.FC = () => {
