@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Header from "@/components/core/Header";
 import SideMenu from "@/components/core/SideMenu/SideMenu";
