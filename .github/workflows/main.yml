@@ -1,40 +1,25 @@
-name: Deploy to Firebase Hosting
+name: Deploy Next.js to Firebase Hosting
 
 on:
   push:
     branches:
-      - master # Trigger this action on pushing to the 'main' branch
+      - master
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest # Use an Ubuntu runner
-
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2 # Check out the code from your repository
+      - uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: "14" # Use Node.js 14.x version (adjust as necessary)
+          node-version: "18.x"
 
-      - name: Install dependencies
-        run: |
-          npm install  # Install project dependencies
+      - run: npm install
+      - run: npm run build
 
-      - name: Build Next.js app
-        run: |
-          npm run build  # Run the Next.js build (you can adjust this if you're using a different build command)
-
-      - name: Install Firebase CLI
-        run: |
-          curl -sL https://firebase.tools | bash  # Install Firebase CLI
-
-      - name: Firebase Login
-        uses: wzieba/Firebase-Action@v2
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          firebase_token: ${{ secrets.FIREBASE_AUTH_TOKEN }} # You can store your Firebase token in GitHub secrets
-
-      - name: Deploy to Firebase Hosting
-        run: |
-          firebase deploy --only hosting --project your-project-id  # Adjust for your Firebase project
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          channelId: live
+          projectId: proffsat-a1ea8
