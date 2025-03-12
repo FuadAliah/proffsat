@@ -1,16 +1,15 @@
 {
   "hosting": {
-    "public": "public",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "public": ".next",
+    "ignore": ["**/.git/**", "**/.github/**", "firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
-        "source": "/favicon.ico",
-        "destination": "/favicon.ico"
-      },
-      {
         "source": "**",
-        "destination": "/index.html"
+        "function": "nextjsFunc"
       }
     ]
+  },
+  "functions": {
+    "source": "."
   }
 }
