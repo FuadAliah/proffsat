@@ -17,9 +17,7 @@ export const resizer = (
       0,
       (uri) => {
         if (uri instanceof Blob) {
-          console.log("uri", uri);
           const image = new File([uri], name, { type: uri.type });
-          console.log("image", image);
           resolve(image);
         } else {
           reject("Error resizing image");

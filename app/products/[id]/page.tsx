@@ -50,7 +50,7 @@ const Page = ({ params }: Props) => {
       };
       setProduct(spreadedData);
     } catch (error) {
-      console.log(error);
+      throw new Error(`Parsing failed: ${error}`);
     } finally {
       setIsLoading(false);
     }
@@ -58,6 +58,7 @@ const Page = ({ params }: Props) => {
 
   useEffect(() => {
     getProduct();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params?.id]);
 
   const renderDescription = (description: string): React.JSX.Element => {
