@@ -14,7 +14,8 @@ export const getDocuments = async (collectionName: string) => {
       }
     );
   } catch (error) {
-    console.error("Error getting documents:", error);
+    throw new Error(`Error: ${error}`);
+
     throw error;
   }
 };
@@ -26,7 +27,8 @@ export const addDocument = async (collectionName: string, documentData: string) 
     });
     return response.data;
   } catch (error) {
-    console.error("Error adding document:", error);
+    throw new Error(`Error: ${error}`);
+
     throw error;
   }
 };
@@ -39,7 +41,8 @@ export const getDocument = async (collectionName: string, documentId: string) =>
       ...response.data.fields,
     };
   } catch (error) {
-    console.error("Error getting document:", error);
+    throw new Error(`Error: ${error}`);
+
     throw error;
   }
 };
@@ -55,7 +58,8 @@ export const updateDocument = async (
     });
     return response.data;
   } catch (error) {
-    console.error("Error updating document:", error);
+    throw new Error(`Error: ${error}`);
+
     throw error;
   }
 };
@@ -65,7 +69,8 @@ export const deleteDocument = async (collectionName: string, documentId: string)
     const response = await axios.delete(`${firestoreUrl}/${collectionName}/${documentId}`);
     return response.data;
   } catch (error) {
-    console.error("Error deleting document:", error);
+    throw new Error(`Error: ${error}`);
+
     throw error;
   }
 };

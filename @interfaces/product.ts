@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export interface ProductType {
   id: string;
   descriptionAR: string;
@@ -14,7 +15,7 @@ export interface ProductType {
 
 export interface ProductAPI {
   map(
-    arg0: (doc: unknown) => {
+    arg0: (doc: ProductType) => {
       id: string;
       nameEN: string;
       nameAR: string;
