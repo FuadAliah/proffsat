@@ -49,14 +49,8 @@ const Page: React.FC = () => {
 
       uploadTask.on(
         "state_changed",
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-        },
-        (error) => {
-          console.log(error);
-          setIsLoading(false);
-        },
+        () => {},
+        () => {},
         async () => {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
           setProduct((prevProduct) => ({ ...prevProduct, image: downloadURL }));
@@ -83,7 +77,8 @@ const Page: React.FC = () => {
         }
       );
     } catch (error) {
-      console.log(error);
+      throw new Error(`Parsing failed: ${error}`);
+    } finally {
       setIsLoading(false);
     }
   };

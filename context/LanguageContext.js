@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const LanguageContext = createContext();
 
@@ -8,6 +8,7 @@ const languageSettings = {
   ar: { direction: "rtl", label: "عربي" },
 };
 
+// eslint-disable-next-line react/prop-types
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState("en");
 

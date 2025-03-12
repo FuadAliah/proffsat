@@ -15,6 +15,7 @@ export const getActiveClass = (route: string, pathname: string) =>
 
 export interface languageProps {
   language: string;
+  // eslint-disable-next-line no-unused-vars
   changeLanguage: (lang: string) => void;
 }
 
