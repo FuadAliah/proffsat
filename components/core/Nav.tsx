@@ -28,21 +28,14 @@ const Nav = () => {
       <ul className='flex gap-4 text-gray-600 text-sm h-full'>
         <li className={`hover:text-indigo-600 rounded-sm ${getActiveClass("/", pathname)}`}>
           <Link className='flex py-2 px-3' href={Routes.HOME}>
-            {getTranslation("Home", language)}
+            {getTranslation("home", language)}
           </Link>
         </li>
         <li
           className={`hover:text-indigo-600 rounded-sm ${getActiveClass("/allproducts", pathname)}`}
         >
           <Link className='flex py-2 px-3' href={Routes.ALL_PRODUCTS}>
-            Products
-          </Link>
-        </li>
-        <li
-          className={`hover:text-indigo-600 rounded-sm ${getActiveClass("/contactus", pathname)}`}
-        >
-          <Link className='flex py-2 px-3' href={Routes.ALL_PRODUCTS}>
-            Contact us
+            {getTranslation("products", language)}
           </Link>
         </li>
       </ul>
@@ -58,7 +51,7 @@ const Nav = () => {
             href={Routes.LOGIN}
             className='px-4 py-2 text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700'
           >
-            Login
+            {getTranslation("login", language)}
           </Link>
         ) : (
           <SignOut />

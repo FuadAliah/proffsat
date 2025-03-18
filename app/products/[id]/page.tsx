@@ -11,6 +11,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Routes } from "@/lib/routes";
 import { useLanguage } from "@/context/LanguageContext";
+import { getTranslation } from "@/utils/translations";
+import { checkDate } from "@/utils/Date";
 
 type ProductData = {
   [key: string]: {
@@ -50,7 +52,7 @@ const Page = ({ params }: Props) => {
       };
       setProduct(spreadedData);
     } catch (error) {
-      console.log(error);
+      throw new Error(`Parsing failed: ${error}`);
     } finally {
       setIsLoading(false);
     }
@@ -58,6 +60,7 @@ const Page = ({ params }: Props) => {
 
   useEffect(() => {
     getProduct();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params?.id]);
 
   const renderDescription = (description: string): React.JSX.Element => {
@@ -84,10 +87,15 @@ const Page = ({ params }: Props) => {
         {useLoading(isLoading, "white")}
         <a
           href={Routes.HOME}
-          className='!flex gap-1 w-fit px-4 py-2.5 bg-gray-100 text-gray-600 rounded-md'
+          className='!flex gap-1 items-center w-fit px-4 py-2.5 bg-gray-100 text-gray-600 rounded-md'
         >
-          <Image src='/backArrow.svg' alt='back arrow' width={20} height={20} />
-          <span>Back</span>
+          <Image
+            src={`/${language === "en" ? "back" : "next"}Arrow.svg`}
+            alt='arrow'
+            width={20}
+            height={20}
+          />
+          <span>{getTranslation("back", language)}</span>
         </a>
         <div className='flex  gap-12 w-5xl '>
           <div className='flex md:w-1/2 w-1/2 h-100 justify-center items-center aspect-square overflow-hidden rounded-2xl p-3 border border-gray-200'>
@@ -99,9 +107,11 @@ const Page = ({ params }: Props) => {
           </div>
 
           <div className='flex md:w-1/2 w-1/2 flex-col gap-4'>
-            <p className='w-fit px-3 sm:py-1.5 py-1 text-[12px] sm:text-sm font-bold tracking-wide text-white uppercase bg-red-500 rounded-full'>
-              New
-            </p>
+            {checkDate(product?.createdAt) && (
+              <p className='w-fit px-3 sm:py-1.5 py-1 text-[12px] sm:text-sm font-bold tracking-wide text-white uppercase bg-red-500 rounded-full'>
+                {getTranslation("new", language)}
+              </p>
+            )}
             <h3 className='font-bold text-gray-900 text-2xl lg:text-5xl'>
               {language === "en" ? product?.nameEN : product?.nameAR}
             </h3>
@@ -132,7 +142,7 @@ const Page = ({ params }: Props) => {
             >
               <div className='flex gap-3'>
                 <Image src='/whatsapp.svg' alt="what's app logo" width={28} height={28} />
-                <span className='text-xl'>Contact us</span>
+                <span className='text-xl'>{getTranslation("whatsapp", language)}</span>
               </div>
             </Link>
           </div>

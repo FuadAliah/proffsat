@@ -6,6 +6,7 @@ import { checkDate } from "@/utils/Date";
 import { Routes } from "@/lib/routes";
 import { ProductType } from "@/@interfaces/product";
 import { useLanguage } from "@/context/LanguageContext";
+import { getTranslation } from "@/utils/translations";
 
 const Product = ({ data }: { data: ProductType }) => {
   const { id, image, createdAt, nameEN, nameAR, price } = data;
@@ -28,7 +29,7 @@ const Product = ({ data }: { data: ProductType }) => {
       <div className='absolute left-3 top-3'>
         {checkDate(createdAt) && (
           <p className='sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-white uppercase bg-red-500 rounded-full'>
-            New
+            {getTranslation("new", language)}
           </p>
         )}
       </div>
@@ -39,7 +40,10 @@ const Product = ({ data }: { data: ProductType }) => {
           </h3>
         </a>
         <span className='text-gray-800 font-bold text-sm md:text-base lg:text-lg'>
-          JD {Number(price).toFixed(2)}
+          <div className={`flex gap-1 ${language === "en" ? "" : "flex flex-row-reverse"}`}>
+            <span>{getTranslation("currency", language)}</span>
+            <span>{Number(price).toFixed(2)}</span>
+          </div>
         </span>
       </div>
 
@@ -47,7 +51,7 @@ const Product = ({ data }: { data: ProductType }) => {
         className='flex justify-center py-2.5 px-4 text-white rounded-lg bg-gray-800 hover:bg-gray-900 w-full mt-4'
         href={Routes.PRODUCT_DETAILS(id)}
       >
-        View
+        {getTranslation("view", language)}
       </Link>
     </div>
   );

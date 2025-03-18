@@ -4,6 +4,7 @@ type Props = {
   placeholder: string;
   className?: string;
   value: string;
+  // eslint-disable-next-line no-unused-vars
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   required: boolean;
   width?: string;

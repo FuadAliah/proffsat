@@ -43,7 +43,7 @@ const Page: React.FC = () => {
       try {
         deleteDocument("products", id).then(() => fetchData());
       } catch (error) {
-        console.error("Error deleting:", error);
+        throw new Error(`Parsing failed: ${error}`);
       }
     }
   };

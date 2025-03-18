@@ -2,6 +2,7 @@ import React from "react";
 interface Props extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   name: string;
   value: string;
+  // eslint-disable-next-line no-unused-vars
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   required: boolean;
   error: string;

@@ -4,8 +4,9 @@ interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"
   placeholder: string;
   type: string;
   value: string;
+  // eslint-disable-next-line no-unused-vars
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  required: boolean;
+  required?: boolean;
   width?: "sm" | "md" | "lg";
   error?: string;
 }
@@ -17,7 +18,7 @@ const Input = ({
   type,
   value,
   onChange,
-  required,
+  required = false,
   error,
   ...props
 }: Props) => {

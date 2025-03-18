@@ -37,7 +37,7 @@ const ProductsList: React.FC<Props> = ({ pageSize }: Props) => {
 
       setProducts(pageSize ? [...formattedProducts.slice(0, pageSize)] : formattedProducts);
     } catch (error) {
-      console.error("Error getting documents:", error);
+      throw new Error(`Parsing failed: ${error}`);
     } finally {
       setLoading(false);
     }
@@ -45,6 +45,7 @@ const ProductsList: React.FC<Props> = ({ pageSize }: Props) => {
 
   useEffect(() => {
     fetchProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
