@@ -1,7 +1,13 @@
 {
   "hosting": {
     "public": ".next",
-    "ignore": ["**/.git/**", "**/.github/**", "firebase.json", "**/.*", "**/node_modules/**"],
+    "ignore": [
+      "**/.git/**",
+      "**/.github/**",
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
     "rewrites": [
       {
         "source": "**",
@@ -13,8 +19,16 @@
     {
       "source": "function",
       "codebase": "proffsat-functions",
-      "ignore": ["node_modules", ".git", "firebase-debug.log", "firebase-debug.*.log", "*.local"],
-      "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run lint"]
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint"
+      ]
     }
   ]
 }
