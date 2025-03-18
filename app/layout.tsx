@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Almarai } from "next/font/google";
 import { LanguageProvider } from "@/context/LanguageContext";
 import InnerLayout from "@/utils/InnerLayout";
 import "./globals.css";
@@ -16,10 +16,18 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const almarai = Almarai({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-almarai",
+});
+
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <LanguageProvider>
-      <InnerLayout inter={inter}>{children}</InnerLayout>
+      <InnerLayout inter={inter} almarai={almarai}>
+        {children}
+      </InnerLayout>
     </LanguageProvider>
   );
 };

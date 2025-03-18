@@ -5,15 +5,17 @@ import { useLanguage } from "@/context/LanguageContext";
 const InnerLayout = ({
   children,
   inter,
+  almarai,
 }: {
   children: React.ReactNode;
-  inter: { className: string };
+  inter: { variable: string };
+  almarai: { variable: string };
 }) => {
   const { language, direction } = useLanguage();
 
   return (
-    <html lang={language} dir={direction}>
-      <body className={inter.className}>{children}</body>
+    <html lang={language} dir={direction || "ar"}>
+      <body className={`${inter.variable} ${almarai.variable}`}>{children}</body>
     </html>
   );
 };

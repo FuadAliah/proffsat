@@ -1,7 +1,25 @@
 {
+  "home": "Home",
   "products": "Products",
   "contact_us": "Contact us",
   "login": "Login",
   "sign_out": "Sign Out",
-  "ar": "AR"
+  "ar": "AR",
+
+  "view": "View",
+  "new": "New",
+  "whatsapp": "Contact Us",
+
+  "back": "Back",
+  "all_products": "All Products",
+  "our_products": "Our Products",
+  "view_all": "View All",
+  "currency": "JD",
+
+  "address": "Amman, Jordan",
+  "name": "Name",
+  "phone": "Phone",
+  "email": "Email",
+  "message": "Message",
+  "send": "Send"
 }
