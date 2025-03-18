@@ -11,7 +11,7 @@ module.exports = {
     "no-restricted-globals": ["error", "name", "length"],
     "prefer-arrow-callback": "error",
     quotes: ["error", "double", { allowTemplateLiterals: true }],
-    "space-before-blocks": ["on"], // Add this line to ignore space before {
+    "space-before-blocks": ["off"], // Add this line to ignore space before {
   },
   overrides: [
     {
