@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{\"/Users/fuadaliah/Desktop/projects/frontend/profsat/app/layout\":[\"static/media/f1429c53baafd0f0-s.p.woff2\",\"static/media/074a2e369810402d-s.p.woff2\",\"static/media/a34f9d1faa5f3315-s.p.woff2\"]},\"appUsingSizeAdjust\":true,\"pagesUsingSizeAdjust\":false}"
