@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "proffsat-a1ea8"
-  }
+    "default": "proffsat-a1ea8",
+    "staging": "proffsat-a1ea8"
+  },
+  "targets": {},
+  "etags": {}
 }
