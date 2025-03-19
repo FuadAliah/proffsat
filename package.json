@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.14.0",
     "@firebase/app": "^0.11.2",
     "@firebase/firestore": "^4.7.8",
+    "@google-cloud/secret-manager": "^6.0.0",
     "@mui/material": "^6.4.6",
     "@mui/x-data-grid": "^7.27.2",
     "@tailwindcss/postcss": "^4.0.9",
