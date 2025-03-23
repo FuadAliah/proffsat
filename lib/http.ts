@@ -1,8 +1,6 @@
 import axios from "axios";
 
-const firestoreUrl = process.env.NEXT_PUBLIC_FIRESTORE_URL;
-// eslint-disable-next-line no-console
-console.log("firestoreUrl", firestoreUrl);
+const firestoreUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export const getDocuments = async (collectionName: string) => {
   try {
@@ -17,8 +15,6 @@ export const getDocuments = async (collectionName: string) => {
     );
   } catch (error) {
     throw new Error(`Error: ${error}`);
-
-    throw error;
   }
 };
 
@@ -30,8 +26,6 @@ export const addDocument = async (collectionName: string, documentData: string) 
     return response.data;
   } catch (error) {
     throw new Error(`Error: ${error}`);
-
-    throw error;
   }
 };
 
@@ -44,8 +38,6 @@ export const getDocument = async (collectionName: string, documentId: string) =>
     };
   } catch (error) {
     throw new Error(`Error: ${error}`);
-
-    throw error;
   }
 };
 
@@ -61,8 +53,6 @@ export const updateDocument = async (
     return response.data;
   } catch (error) {
     throw new Error(`Error: ${error}`);
-
-    throw error;
   }
 };
 
@@ -72,7 +62,5 @@ export const deleteDocument = async (collectionName: string, documentId: string)
     return response.data;
   } catch (error) {
     throw new Error(`Error: ${error}`);
-
-    throw error;
   }
 };
