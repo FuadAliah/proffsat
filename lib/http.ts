@@ -1,8 +1,10 @@
 import axios from "axios";
 
 const firestoreUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+const id = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
 // eslint-disable-next-line no-console
 console.log("firestoreUrl", firestoreUrl);
+console.log("id", id);
 
 export const getDocuments = async (collectionName: string) => {
   try {
