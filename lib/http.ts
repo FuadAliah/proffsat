@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const firestoreUrl = process.env.NEXT_PUBLIC_FIRESTORE_URL;
+const firestoreUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 // eslint-disable-next-line no-console
 console.log("firestoreUrl", firestoreUrl);
 
