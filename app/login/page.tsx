@@ -6,6 +6,8 @@ import useLoading from "@/hooks/useLoading";
 import { auth } from "@/firebaseConfig";
 import { useRouter } from "next/navigation";
 import { Routes } from "@/lib/routes";
+import axios from "axios";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const LoginPage: React.FC = () => {
   const router = useRouter();
@@ -14,22 +16,18 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
 
   const handleLogin = async () => {
     setLoading(true);
-    const res = await signInWithEmailAndPassword(email, password)
-      .then(() => {
-        setEmail("");
-        setPassword("");
-        router.push(Routes.HOME);
-      })
-      .catch((error) => {
-        setErrorMessage(error.message);
-        setLoading(false);
-        return;
-      });
-    return res;
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log(userCredential);
+      router.push(Routes.HOME);
+    } catch (error: any) {
+      setErrorMessage(error?.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

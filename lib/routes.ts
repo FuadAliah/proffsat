@@ -1,7 +1,7 @@
 export const Routes = {
   HOME: "/",
   LOGIN: "/login",
-  ALL_PRODUCTS: "/allproducts",
+  ALL_PRODUCTS: "/products",
   PRODUCT_DETAILS: (id: string) => `/products/${id}`,
 
   // Dashboard
