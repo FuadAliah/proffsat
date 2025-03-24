@@ -5,7 +5,7 @@ import ProductsList from "@/components/ProductsList";
 import PageHeader from "@/components/core/PageHeader";
 import Footer from "@/components/core/Footer";
 
-const AllProducts: React.FC = () => {
+const Products: React.FC = () => {
   return (
     <>
       <Containe>
@@ -21,4 +21,4 @@ const AllProducts: React.FC = () => {
   );
 };
 
-export default AllProducts;
+export default Products;

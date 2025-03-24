@@ -14,7 +14,6 @@ const Products: React.FC = () => {
       <div className='mx-auto sm:px-6 px-4 max-w-7xl'>
         <div className='mx-auto text-center'>
           <h2 className='text-2xl font-bold text-gray-900 sm:text-3xl'>
-            {" "}
             {getTranslation("our_products", language)}
           </h2>
         </div>
