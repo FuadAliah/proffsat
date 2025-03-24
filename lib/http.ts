@@ -4,7 +4,7 @@ const firestoreUrl = process.env.NEXT_PUBLIC_FIRESTORE_URL;
 
 export const getDocuments = async (collectionName: string) => {
   try {
-    const response = await axios.get(`${firestoreUrl}/${collectionName}`);
+    const response = await axios.get(`${firestoreUrl}fuad/${collectionName}`);
     return response.data.documents.map(
       (document: { name: string; fields: Record<string, null> }) => {
         return {
