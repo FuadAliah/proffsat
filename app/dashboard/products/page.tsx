@@ -6,45 +6,27 @@ import { Routes } from "@/lib/routes";
 import { useRouter } from "next/navigation";
 import { GridColDef } from "@mui/x-data-grid";
 import Image from "next/image";
-import { ProductAPI, ProductType } from "@/@interfaces/product";
+import { ProductType } from "@/@interfaces/product";
 
 const Page: React.FC = () => {
   const [data, setData] = useState<ProductType[]>([]);
+  const [loading, setLoading] = useState<boolean>();
   const router = useRouter();
 
-  const fetchData = () => {
-    getDocuments("products").then((res: ProductAPI[]) => {
-      setData(
-        res
-          ?.map((doc: ProductAPI) => ({
-            id: doc.id,
-            nameEN: doc.nameEN.stringValue || "f",
-            nameAR: doc.nameAR?.stringValue || "",
-            brand: doc.brand?.stringValue || "",
-            category: doc.category?.stringValue || "",
-            price: doc.price?.stringValue || "0",
-            createdAt: doc.createdAt?.stringValue || "",
-            descriptionEN: doc.descriptionEN?.stringValue || "",
-            descriptionAR: doc.descriptionAR?.stringValue || "",
-            size: doc.size?.stringValue || "",
-            image: doc.image?.stringValue || "",
-          }))
-          .sort((a: { createdAt: string }, b: { createdAt: string }) => {
-            return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
-          })
-      );
-    });
+  const fetchData = async () => {
+    setLoading(true);
+    const docs = await getDocuments("products");
+    setData(docs as ProductType[]);
+    setLoading(false);
   };
 
   const handleDelete = async (id: string) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this?");
 
     if (isConfirmed) {
-      try {
-        deleteDocument("products", id).then(() => fetchData());
-      } catch (error) {
-        throw new Error(`Parsing failed: ${error}`);
-      }
+      await deleteDocument("products", id).then(() => {
+        fetchData();
+      });
     }
   };
 
@@ -90,11 +72,11 @@ const Page: React.FC = () => {
       renderCell(params) {
         return (
           <div className='flex items-center gap-2 h-full'>
-            <Button className='!bg-blue-100 !px-3 !py-2 h-9'>
+            <Button className='!bg-blue-100 !px-3 !py-2 h-9 !hover:bg-blue-300'>
               <Image src='/edit.svg' alt='' width={20} height={20} />
             </Button>
             <Button
-              className='!bg-red-100 !px-3 !py-2 h-9'
+              className='!bg-red-100 !px-3 !py-2 h-9 !hover:bg-red-300'
               onClick={() => handleDelete(params.row.id)}
             >
               <Image src='/delete.svg' alt='' width={20} height={20} />
@@ -117,7 +99,7 @@ const Page: React.FC = () => {
         />
       </div>
 
-      <Table rows={data} columns={columns} pageSize={10} />
+      <Table rows={data} columns={columns} pageSize={10} loading={loading} />
     </div>
   );
 };

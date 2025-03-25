@@ -41,3 +41,10 @@ html[lang="ar"] body {
 .MuiDataGrid-columnSeparator {
   display: none !important;
 }
+
+.css-dgb1b-MuiDataGrid-root .MuiDataGrid-columnHeader:focus,
+.MuiDataGrid-columnHeader:focus-within,
+.css-dgb1b-MuiDataGrid-root .MuiDataGrid-cell:focus,
+.MuiDataGrid-cell:focus-within {
+  outline: none !important;
+}

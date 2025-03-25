@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ProductAPI, ProductType } from "@/@interfaces/product";
+import { ProductType } from "@/@interfaces/product";
 import Product from "@/components/Product";
 import useLoading from "@/hooks/useLoading";
 import { getDocuments } from "@/lib/http";
@@ -15,32 +15,12 @@ const ProductsList: React.FC<Props> = ({ pageSize }: Props) => {
 
   const fetchProducts = async () => {
     setLoading(true);
-    try {
-      const response = await getDocuments("products");
-      const formattedProducts = response
-        .map((item: ProductAPI) => ({
-          id: item.id,
-          descriptionEN: item.descriptionEN.stringValue,
-          brand: item.brand.stringValue,
-          size: item.size.stringValue,
-          image: item.image.stringValue,
-          nameEN: item.nameEN.stringValue,
-          category: item.category.stringValue,
-          createdAt: item.createdAt.timestampValue,
-          price: item.price.stringValue,
-          nameAR: item.nameAR.stringValue,
-          descriptionAR: item.descriptionAR.stringValue,
-        }))
-        .sort((a: { createdAt: string }, b: { createdAt: string }) => {
-          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-        });
-
-      setProducts(pageSize ? [...formattedProducts.slice(0, pageSize)] : formattedProducts);
-    } catch (error) {
-      throw new Error(`Parsing failed: ${error}`);
-    } finally {
-      setLoading(false);
+    const docs = await getDocuments("products");
+    if (docs) {
+      console.log("docs", docs);
+      setProducts(docs.slice(0, pageSize) as ProductType[]);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
