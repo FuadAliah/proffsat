@@ -30,17 +30,17 @@ jobs:
           echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}" >> .env.production
           echo "NEXT_PUBLIC_FIRESTORE_URL=${{ secrets.NEXT_PUBLIC_FIRESTORE_URL }}" >> .env.production
 
-          - name: Lint .env.production file
-          run: |
-            echo "🔍 Linting .env.production..."
-            cat .env.production | while IFS= read -r line; do
-              if [[ "$line" =~ ^[^#=]+=[^=]+$ ]]; then
-                echo "✅ Valid: $line"
-              elif [[ -n "$line" && ! "$line" =~ ^# ]]; then
-                echo "❌ Invalid env line: '$line'"
-                exit 1
-              fi
-            done
+      - name: Lint .env.production file
+        run: |
+          echo "🔍 Linting .env.production..."
+          cat .env.production | while IFS= read -r line; do
+            if [[ "$line" =~ ^[^#=]+=[^=]+$ ]]; then
+              echo "✅ Valid: $line"
+            elif [[ -n "$line" && ! "$line" =~ ^# ]]; then
+              echo "❌ Invalid env line: '$line'"
+              exit 1
+            fi
+          done
 
       - name: Build Next.js app
         run: npm run build
