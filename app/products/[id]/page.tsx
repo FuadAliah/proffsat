@@ -14,13 +14,6 @@ import { useLanguage } from "@/context/LanguageContext";
 import { getTranslation } from "@/utils/translations";
 import { checkDate } from "@/utils/Date";
 
-type ProductData = {
-  [key: string]: {
-    stringValue?: string;
-    timestampValue?: string;
-  };
-};
-
 type Props = {
   params: { id: string };
 };
@@ -35,27 +28,9 @@ const Page = ({ params }: Props) => {
 
   const getProduct = async () => {
     setIsLoading(true);
-    try {
-      const data: ProductData = await getDocument("products", params?.id);
-      const spreadedData: ProductType = {
-        id: data.id?.stringValue || "",
-        createdAt: data.createdAt?.timestampValue || "",
-        nameEN: data.nameEN?.stringValue || "",
-        nameAR: data.nameAR?.stringValue || "",
-        descriptionEN: data.descriptionEN?.stringValue || "",
-        descriptionAR: data.descriptionAR?.stringValue || "",
-        category: data.category?.stringValue || "",
-        image: data.image?.stringValue || "",
-        size: data.size?.stringValue || "",
-        brand: data.brand?.stringValue || "",
-        price: data.price?.stringValue || "",
-      };
-      setProduct(spreadedData);
-    } catch (error) {
-      throw new Error(`Parsing failed: ${error}`);
-    } finally {
-      setIsLoading(false);
-    }
+    const doc = await getDocument("products", params.id);
+    setProduct(doc as ProductType);
+    setIsLoading(false);
   };
 
   useEffect(() => {

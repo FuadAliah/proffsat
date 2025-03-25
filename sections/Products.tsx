@@ -18,7 +18,7 @@ const Products: React.FC = () => {
           </h2>
         </div>
 
-        <ProductsList pageSize={8} />
+        <ProductsList pageSize={12} />
         <div className='flex w-full justify-center'>
           <Link
             href={Routes.ALL_PRODUCTS}
