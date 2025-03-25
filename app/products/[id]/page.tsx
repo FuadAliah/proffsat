@@ -28,8 +28,12 @@ const Page = ({ params }: Props) => {
 
   const getProduct = async () => {
     setIsLoading(true);
-    const doc = await getDocument("products", params.id);
-    setProduct(doc as ProductType);
+    try {
+      const doc = await getDocument("products", params.id);
+      setProduct(doc as ProductType);
+    } catch (error) {
+      throw new Error(`Failed to fetch data ${error}`);
+    }
     setIsLoading(false);
   };
 

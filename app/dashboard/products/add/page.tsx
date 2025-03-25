@@ -20,6 +20,7 @@ const Page: React.FC = () => {
 
   const [file, setFile] = useState<FileProps[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  // const [successMes, setSuccessMes] = useState<string>("");
   const [product, setProduct] = useState<Omit<ProductType, "id" | "createdAt">>({
     image: "",
     nameEN: "",
@@ -74,6 +75,7 @@ const Page: React.FC = () => {
             size: "",
           });
           router.push(Routes.PRODUCTS);
+          // setSuccessMes("Products fetched successfully");
         }
       );
     } catch (error) {
