@@ -4,7 +4,7 @@ const firestoreUrl = process.env.NEXT_PUBLIC_FIRESTORE_URL;
 
 export const getDocuments = async (collectionName: string) => {
   try {
-    const response = await axios.get(`${firestoreUrl}/${collectionName}`);
+    const response = await axios.get(`${firestoreUrl}fuad/${collectionName}`);
     return response.data.documents.map(
       (document: { name: string; fields: Record<string, null> }) => {
         return {
@@ -15,8 +15,6 @@ export const getDocuments = async (collectionName: string) => {
     );
   } catch (error) {
     throw new Error(`Error: ${error}`);
-
-    throw error;
   }
 };
 
@@ -28,8 +26,6 @@ export const addDocument = async (collectionName: string, documentData: string) 
     return response.data;
   } catch (error) {
     throw new Error(`Error: ${error}`);
-
-    throw error;
   }
 };
 
@@ -42,8 +38,6 @@ export const getDocument = async (collectionName: string, documentId: string) =>
     };
   } catch (error) {
     throw new Error(`Error: ${error}`);
-
-    throw error;
   }
 };
 
@@ -59,8 +53,6 @@ export const updateDocument = async (
     return response.data;
   } catch (error) {
     throw new Error(`Error: ${error}`);
-
-    throw error;
   }
 };
 
@@ -70,7 +62,5 @@ export const deleteDocument = async (collectionName: string, documentId: string)
     return response.data;
   } catch (error) {
     throw new Error(`Error: ${error}`);
-
-    throw error;
   }
 };

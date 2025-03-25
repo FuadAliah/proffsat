@@ -31,9 +31,7 @@ const Nav = () => {
             {getTranslation("home", language)}
           </Link>
         </li>
-        <li
-          className={`hover:text-indigo-600 rounded-sm ${getActiveClass("/allproducts", pathname)}`}
-        >
+        <li className={`hover:text-indigo-600 rounded-sm ${getActiveClass("/products", pathname)}`}>
           <Link className='flex py-2 px-3' href={Routes.ALL_PRODUCTS}>
             {getTranslation("products", language)}
           </Link>
