@@ -10,15 +10,16 @@ type Props = {
 };
 
 const ProductsList: React.FC<Props> = ({ pageSize }: Props) => {
-  const [products, setProducts] = useState<Omit<ProductType[], "id" | "createdAt">>([]);
+  const [products, setProducts] = useState<Omit<ProductType[], "id">>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const fetchProducts = async () => {
     setLoading(true);
-    const docs = await getDocuments("products");
-    if (docs) {
-      console.log("docs", docs);
+    try {
+      const docs = await getDocuments("products");
       setProducts(docs.slice(0, pageSize) as ProductType[]);
+    } catch (error) {
+      throw new Error(`Failed to fetch products ${error}`);
     }
     setLoading(false);
   };
