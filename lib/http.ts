@@ -3,6 +3,8 @@ import { firestore } from "@/firebaseConfig";
 
 export const getDocuments = async (collectionName: string) => {
   try {
+    console.log(`Fetching documents from firestore: ${JSON.stringify(firestore)}`);
+    console.log(`Fetching documents from collectionName: ${JSON.stringify(collectionName)}`);
     const colRef = collection(firestore, collectionName);
     const snapshot = await getDocs(colRef);
     return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
