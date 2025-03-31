@@ -4,11 +4,12 @@ interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"
   placeholder: string;
   type: string;
   value: string;
-  // eslint-disable-next-line no-unused-vars
+  className?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
   width?: "sm" | "md" | "lg";
   error?: string;
+  refEl?: React.RefObject<HTMLInputElement | null>;
 }
 
 const Input = ({
@@ -20,18 +21,20 @@ const Input = ({
   onChange,
   required = false,
   error,
+  className,
+  refEl,
   ...props
 }: Props) => {
   const baseClasses =
     "block text-black placeholder-gray-400 text-sm transition-all duration-200 border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600";
   const sizeClasses = {
     sm: "px-3 py-2 text-sm",
-    md: "px-4 py-3 text-base",
-    lg: "px-5 py-3.5 text-lg",
+    md: "px-3 py-3 text-base",
+    lg: "px-3 py-3.5 text-lg",
   };
 
   return (
-    <div className='flex flex-col gap-2'>
+    <div className='flex w-full flex-col gap-2'>
       <input
         name={name}
         placeholder={placeholder}
@@ -39,7 +42,10 @@ const Input = ({
         value={value}
         onChange={onChange}
         required={required}
-        className={`${baseClasses} ${sizeClasses[width]} ${error ? "border-red-500" : ""}`}
+        ref={refEl}
+        className={`${baseClasses} ${sizeClasses[width]} ${
+          error ? "border-red-500" : ""
+        } ${className}`}
         {...props}
       />
       {error && <span className='text-sm text-red-600'>{error}</span>}

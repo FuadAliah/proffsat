@@ -1,12 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Input, Button } from "@/components/ui";
 import useLoading from "@/hooks/useLoading";
 import { auth } from "@/firebaseConfig";
 import { useRouter } from "next/navigation";
 import { Routes } from "@/lib/routes";
-import axios from "axios";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const LoginPage: React.FC = () => {

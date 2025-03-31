@@ -1,5 +1,6 @@
-import { collection, doc, getDocs, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { collection, doc, getDocs, getDoc, updateDoc, deleteDoc, addDoc } from "firebase/firestore";
 import { firestore } from "@/firebaseConfig";
+import { LookupType } from "@/@interfaces/category";
 
 export const getDocuments = async (collectionName: string) => {
   try {
@@ -22,6 +23,16 @@ export const getDocument = async (collectionName: string, documentId: string) =>
     }
   } catch (error) {
     throw new Error(`Error fetching document: ${error}`);
+  }
+};
+
+export const addDocument = async (collectionName: string, documentData: Omit<LookupType, "id">) => {
+  try {
+    const colRef = collection(firestore, collectionName);
+    const docRef = await addDoc(colRef, documentData);
+    return { id: docRef.id };
+  } catch (error) {
+    throw new Error(`Error creating document: ${error}`);
   }
 };
 

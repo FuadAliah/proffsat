@@ -8,12 +8,7 @@ export const nav = [
   },
   {
     href: Routes.CATEGORIES,
-    text: "Categories",
-    icon: "/categories.svg",
-  },
-  {
-    href: Routes.BRANDS,
-    text: "Brands",
-    icon: "/next.svg",
+    text: "Lookups",
+    icon: "/lookups.svg",
   },
 ];

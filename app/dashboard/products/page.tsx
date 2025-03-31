@@ -10,7 +10,7 @@ import { ProductType } from "@/@interfaces/product";
 
 const Page: React.FC = () => {
   const [data, setData] = useState<ProductType[]>([]);
-  const [loading, setLoading] = useState<boolean>();
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const fetchData = async () => {
