@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/firebaseConfig";
 import SignOut from "../SignOut";
@@ -9,6 +8,7 @@ import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 import { getTranslation } from "@/utils/translations";
 import { Routes } from "@/lib/routes";
+import Image from "next/image";
 
 export const getActiveClass = (route: string, pathname: string) =>
   pathname === route ? "bg-indigo-50 text-indigo-600" : "";
@@ -22,6 +22,8 @@ const Nav = () => {
   const pathname = usePathname();
   const [user] = useAuthState(auth);
   const { language, changeLanguage }: languageProps = useLanguage();
+
+  const router = useRouter();
 
   return (
     <div className='flex gap-20 items-center'>
@@ -38,6 +40,14 @@ const Nav = () => {
         </li>
       </ul>
       <div className='flex gap-4'>
+        {user && (
+          <Button
+            className='!px-2 !py-1 !bg-white !text-gray-500 font-bold text-sm border border-gray-100 !hover:bg-gray-100'
+            onClick={() => router.push(Routes.MESSAGES)}
+          >
+            <Image src='/chat.svg' alt='' width={24} height={24} />
+          </Button>
+        )}
         <Button
           className='!px-2 !py-1 !bg-white !text-gray-500 font-bold text-sm border border-gray-100 !hover:bg-gray-100'
           onClick={() => changeLanguage(language === "en" ? "ar" : "en")}

@@ -8,4 +8,5 @@ export const Routes = {
   PRODUCTS: "/dashboard/products",
   ADD_PRODUCT: "/dashboard/products/add",
   CATEGORIES: "/dashboard/lookups",
+  MESSAGES: "/dashboard/inbox",
 };

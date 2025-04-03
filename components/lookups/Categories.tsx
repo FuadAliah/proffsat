@@ -19,7 +19,10 @@ const Categories = ({ categories, fetch, loading }: Props) => {
 
   const handleAdd = async () => {
     if (newCategory.trim() !== "") {
-      await addDocument("categories", { name: newCategory }).then(() => {
+      await addDocument("categories", {
+        name: newCategory,
+        createdAt: new Date().toISOString(),
+      }).then(() => {
         setNewCategory("");
         setAdd(false);
         fetch();

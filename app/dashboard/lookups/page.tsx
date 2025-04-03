@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { getDocuments } from "@/lib/http";
 import { LookupType } from "@/@interfaces/category";
-import Card from "@/components/Card";
 import Categories from "@/components/lookups/Categories";
 import Brands from "@/components/lookups/Brands";
 import Sizes from "@/components/lookups/Sizes";

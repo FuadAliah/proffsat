@@ -19,11 +19,13 @@ const Sizes = ({ sizes, fetch, loading }: Props) => {
 
   const handleAdd = async () => {
     if (newSize.trim() !== "") {
-      await addDocument("sizes", { name: newSize }).then(() => {
-        setNewSize("");
-        setAdd(false);
-        fetch();
-      });
+      await addDocument("sizes", { name: newSize, createdAt: new Date().toISOString() }).then(
+        () => {
+          setNewSize("");
+          setAdd(false);
+          fetch();
+        }
+      );
     }
     return;
   };

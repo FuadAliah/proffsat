@@ -3,19 +3,47 @@ import React, { useState } from "react";
 import { Button, Input, Textarea } from "./ui";
 import { getTranslation } from "@/utils/translations";
 import { useLanguage } from "@/context/LanguageContext";
-type Props = {};
+import { addDocument } from "@/lib/http";
+import { MessageType } from "@/@interfaces/messages";
 
-const ContactForm = (props: Props) => {
+type UserProps = {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  readed: boolean;
+  createdAt: string;
+};
+
+const ContactForm = () => {
   const { language } = useLanguage();
-  const [user, setUser] = useState({ name: "", email: "", phone: "", message: "" });
+  const [user, setUser] = useState<Omit<UserProps, "id" | "createdAt">>({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+    readed: false,
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user);
+    try {
+      await addDocument("messages", { ...user, createdAt: new Date().toISOString() });
+    } catch (error) {
+      console.log(user);
+    } finally {
+      setUser({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+        readed: false,
+      });
+    }
   };
 
   return (

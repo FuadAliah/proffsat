@@ -18,8 +18,7 @@ const LoginPage: React.FC = () => {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log(userCredential);
+      await signInWithEmailAndPassword(auth, email, password);
       router.push(Routes.HOME);
     } catch (error: any) {
       setErrorMessage(error?.message);

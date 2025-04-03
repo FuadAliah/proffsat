@@ -19,11 +19,13 @@ const Brands = ({ brands, fetch, loading }: Props) => {
 
   const handleAdd = async () => {
     if (newBrands.trim() !== "") {
-      await addDocument("brands", { name: newBrands }).then(() => {
-        setNewBrands("");
-        setAdd(false);
-        fetch();
-      });
+      await addDocument("brands", { name: newBrands, createdAt: new Date().toISOString() }).then(
+        () => {
+          setNewBrands("");
+          setAdd(false);
+          fetch();
+        }
+      );
     }
     return;
   };
