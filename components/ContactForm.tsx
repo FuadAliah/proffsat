@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Button, Input, Textarea } from "./ui";
+import { Button, CircleLoading, Input, Textarea } from "./ui";
 import { getTranslation } from "@/utils/translations";
 import { useLanguage } from "@/context/LanguageContext";
 import { addDocument } from "@/lib/http";
@@ -25,11 +25,14 @@ const ContactForm = () => {
     readed: false,
   });
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
     e.preventDefault();
     try {
       await addDocument("messages", { ...user, createdAt: new Date().toISOString() });
@@ -43,6 +46,7 @@ const ContactForm = () => {
         message: "",
         readed: false,
       });
+      setLoading(false);
     }
   };
 
@@ -79,8 +83,9 @@ const ContactForm = () => {
         required
         error=''
       />
-      <Button className='flex w-32 !px-8 justify-center self-end' type='submit'>
-        {getTranslation("send", language)}
+      <Button className='flex gap-4 justify-center items-center self-end' type='submit'>
+        {loading && <span className='loader'></span>}
+        <span>{getTranslation("send", language)}</span>
       </Button>
     </form>
   );
