@@ -1,12 +1,11 @@
 "use client";
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { checkDate } from "@/utils/Date";
 import { Routes } from "@/lib/routes";
 import { ProductType } from "@/@interfaces/product";
 import { useLanguage } from "@/context/LanguageContext";
 import { getTranslation } from "@/utils/translations";
+import { isWithin3Days } from "@/lib/utils";
 
 const Product = ({ data }: { data: ProductType }) => {
   const { id, image, createdAt, nameEN, nameAR, price } = data;
@@ -27,7 +26,7 @@ const Product = ({ data }: { data: ProductType }) => {
       </div>
 
       <div className='absolute left-3 top-3'>
-        {checkDate(createdAt) && (
+        {isWithin3Days(createdAt) && (
           <p className='sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-white uppercase bg-red-500 rounded-full'>
             {getTranslation("new", language)}
           </p>

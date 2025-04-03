@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Dropzone, Select, Textarea, Input } from "@/components/ui";
 import { firestore, storage } from "@/firebaseConfig";
 import { addDoc, collection } from "@firebase/firestore";
@@ -9,6 +9,8 @@ import { resizer } from "@/lib/resizer";
 import { useRouter } from "next/navigation";
 import { Routes } from "@/lib/routes";
 import { ProductType } from "@/@interfaces/product";
+import { LookupType } from "@/@interfaces/category";
+import { getDocuments } from "@/lib/http";
 
 interface FileProps {
   file: File;
@@ -20,7 +22,9 @@ const Page: React.FC = () => {
 
   const [file, setFile] = useState<FileProps[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // const [successMes, setSuccessMes] = useState<string>("");
+  const [categories, setCategories] = useState<LookupType[]>([]);
+  const [brands, setBrands] = useState<LookupType[]>([]);
+  const [sizes, setSizes] = useState<LookupType[]>([]);
   const [product, setProduct] = useState<Omit<ProductType, "id" | "createdAt">>({
     image: "",
     nameEN: "",
@@ -38,6 +42,22 @@ const Page: React.FC = () => {
   ) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
+  };
+
+  const fetchLookups = async () => {
+    try {
+      const [categories, brands, sizes] = await Promise.all([
+        getDocuments("categories"),
+        getDocuments("brands"),
+        getDocuments("sizes"),
+      ]);
+
+      setCategories(categories as LookupType[]);
+      setBrands(brands as LookupType[]);
+      setSizes(sizes as LookupType[]);
+    } catch (error) {
+      console.error("Error fetching lookups:", error);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -75,7 +95,6 @@ const Page: React.FC = () => {
             size: "",
           });
           router.push(Routes.PRODUCTS);
-          // setSuccessMes("Products fetched successfully");
         }
       );
     } catch (error) {
@@ -84,6 +103,10 @@ const Page: React.FC = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchLookups();
+  }, []);
 
   return (
     <>
@@ -98,7 +121,7 @@ const Page: React.FC = () => {
               onChange={(e) => handleChange(e)}
               required
               error=''
-              options={["TV", "Receiver"]}
+              options={categories}
             />
             <div className='grid grid-cols-2 gap-4 col-span-1'>
               <Input
@@ -126,7 +149,7 @@ const Page: React.FC = () => {
               onChange={(e) => handleChange(e)}
               required
               error=''
-              options={["Spider", "Ghazal"]}
+              options={brands}
             />
             {product.category === "TV" && (
               <Select
@@ -135,7 +158,7 @@ const Page: React.FC = () => {
                 onChange={(e) => handleChange(e)}
                 required
                 error=''
-                options={["55", "35"]}
+                options={sizes}
               />
             )}
             <Textarea

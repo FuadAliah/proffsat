@@ -1,10 +1,21 @@
-import { collection, doc, getDocs, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  getDoc,
+  updateDoc,
+  deleteDoc,
+  addDoc,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { firestore } from "@/firebaseConfig";
 
-export const getDocuments = async (collectionName: string) => {
+export const getDocuments = async (collectionName: string, order: string = "createdAt") => {
   try {
     const colRef = collection(firestore, collectionName);
-    const snapshot = await getDocs(colRef);
+    const qy = query(colRef, orderBy(order, "desc"));
+    const snapshot = await getDocs(qy);
     return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     throw new Error(`Error fetching documents: ${error}`);
@@ -25,7 +36,16 @@ export const getDocument = async (collectionName: string, documentId: string) =>
   }
 };
 
-// still not used updateDocument
+export const addDocument = async (collectionName: string, documentData: any) => {
+  try {
+    const colRef = collection(firestore, collectionName);
+    const docRef = await addDoc(colRef, documentData);
+    return { id: docRef.id };
+  } catch (error) {
+    throw new Error(`Error creating document: ${error}`);
+  }
+};
+
 export const updateDocument = async (
   collectionName: string,
   documentId: string,

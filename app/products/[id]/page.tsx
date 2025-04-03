@@ -6,13 +6,12 @@ import DefualtImage from "@/components/DefualtImage";
 import Header from "@/components/core/Header";
 import useLoading from "@/hooks/useLoading";
 import { getDocument } from "@/lib/http";
-import { checkDescription } from "@/lib/utils";
+import { isWithin3Days, checkDescription } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { Routes } from "@/lib/routes";
 import { useLanguage } from "@/context/LanguageContext";
 import { getTranslation } from "@/utils/translations";
-import { checkDate } from "@/utils/Date";
 
 type Props = {
   params: { id: string };
@@ -59,6 +58,8 @@ const Page = ({ params }: Props) => {
     );
   };
 
+  console.log("product", product);
+
   return (
     <div className='flex flex-col items-center min-h-screen bg-white'>
       <Header />
@@ -86,7 +87,7 @@ const Page = ({ params }: Props) => {
           </div>
 
           <div className='flex md:w-1/2 w-1/2 flex-col gap-4'>
-            {checkDate(product?.createdAt) && (
+            {product?.createdAt && isWithin3Days(product.createdAt) && (
               <p className='w-fit px-3 sm:py-1.5 py-1 text-[12px] sm:text-sm font-bold tracking-wide text-white uppercase bg-red-500 rounded-full'>
                 {getTranslation("new", language)}
               </p>

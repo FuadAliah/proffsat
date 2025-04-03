@@ -7,8 +7,6 @@ export const Routes = {
   // Dashboard
   PRODUCTS: "/dashboard/products",
   ADD_PRODUCT: "/dashboard/products/add",
-  CATEGORIES: "/dashboard/categories",
-  ADD_CATEGORY: "/dashboard/categories/add",
-  BRANDS: "/dashboard/brands",
-  ADD_BRAND: "/dashboard/brands/add",
+  CATEGORIES: "/dashboard/lookups",
+  MESSAGES: "/dashboard/inbox",
 };
