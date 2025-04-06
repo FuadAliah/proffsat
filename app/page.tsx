@@ -1,13 +1,13 @@
 import React from "react";
+import { SpecialProducts, Contacts, Products } from "@/sections";
 import Hero from "@/components/Hero";
-import Products from "@/sections/Products";
 import Footer from "@/components/core/Footer";
-import Contacts from "@/sections/Contacts";
 
 const Home: React.FC = () => {
   return (
     <main className='flex flex-col'>
       <Hero />
+      <SpecialProducts />
       <Products />
       <Contacts />
       <Footer />

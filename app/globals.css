@@ -17,6 +17,11 @@
   }
 } */
 
+input,
+textarea {
+  background: #ffffff !important;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -67,4 +72,17 @@ html[lang="ar"] body {
 .css-dgb1b-MuiDataGrid-root .MuiDataGrid-cell:focus,
 .MuiDataGrid-cell:focus-within {
   outline: none !important;
+}
+
+.mySwiper {
+  height: 320px;
+}
+
+.swiper-wrapper {
+  height: 280px !important;
+}
+
+.swiper-pagination {
+  position: unset !important;
+  margin-top: 1rem;
 }

@@ -8,13 +8,25 @@ import {
   addDoc,
   orderBy,
   query,
+  where,
+  QueryConstraint,
 } from "firebase/firestore";
 import { firestore } from "@/firebaseConfig";
+import { FilterType } from "@/@interfaces/filteredAPI";
 
-export const getDocuments = async (collectionName: string, order: string = "createdAt") => {
+export const getDocuments = async (
+  collectionName: string,
+  order: string = "createdAt",
+  filter?: FilterType
+) => {
   try {
     const colRef = collection(firestore, collectionName);
-    const qy = query(colRef, orderBy(order, "desc"));
+    const constraints: QueryConstraint[] = [orderBy(order, "desc")];
+
+    if (filter) {
+      constraints.unshift(where(filter?.field, filter?.operator, filter?.value));
+    }
+    const qy = query(colRef, ...constraints);
     const snapshot = await getDocs(qy);
     return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
