@@ -17,6 +17,11 @@
   }
 } */
 
+input,
+textarea {
+  background: #ffffff !important;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -49,6 +54,11 @@ html[lang="ar"] body {
   animation: rotation 1s linear infinite;
 }
 
+.loader.gray {
+  border: 3px solid #848484 !important;
+  border-bottom-color: transparent !important;
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -67,4 +77,17 @@ html[lang="ar"] body {
 .css-dgb1b-MuiDataGrid-root .MuiDataGrid-cell:focus,
 .MuiDataGrid-cell:focus-within {
   outline: none !important;
+}
+
+.mySwiper {
+  height: 320px;
+}
+
+.swiper-wrapper {
+  height: 280px !important;
+}
+
+.swiper-pagination {
+  position: unset !important;
+  margin-top: 1rem;
 }

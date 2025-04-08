@@ -17,7 +17,7 @@ const Page: React.FC = () => {
     setLoading(true);
     try {
       const products = await getDocuments("products");
-      setData(products as ProductType[]);
+      setData(products.documents as ProductType[]);
     } catch (error) {
       throw new Error(`Failed to fetch data ${error}`);
     }

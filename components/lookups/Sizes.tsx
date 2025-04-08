@@ -74,7 +74,7 @@ const Sizes = ({ sizes, fetch, loading }: Props) => {
                 className='w-full px-4 py-3 bg-whit hover:bg-gray-50 not-last-of-type:border-b border-gray-100'
               >
                 <div className='flex justify-between items-center'>
-                  <div>{item.name}</div>
+                  <h4 className='text-gray-600 font-extralight'>{item.name}</h4>
                   <div className='flex items-center gap-2 h-full'>
                     <Button className='!bg-white !px-1 !py-1' onClick={() => handleDelete(item.id)}>
                       <Image src='/delete.svg' alt='' width={20} height={20} />

@@ -3,7 +3,7 @@ import React from "react";
 interface Props extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   name: string;
   value: string;
-  // eslint-disable-next-line no-unused-vars
+  placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   required: boolean;
   error: string;
@@ -19,6 +19,7 @@ const Select = ({
   required,
   error,
   options,
+  placeholder,
   ...props
 }: Props) => {
   const baseClasses =
@@ -40,7 +41,7 @@ const Select = ({
         {...props}
       >
         <option className='text-sm' value=''>
-          Select
+          {placeholder || "Select"}
         </option>
         {options &&
           options.map((option) => (

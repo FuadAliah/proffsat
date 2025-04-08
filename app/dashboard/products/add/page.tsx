@@ -52,9 +52,9 @@ const Page: React.FC = () => {
         getDocuments("sizes"),
       ]);
 
-      setCategories(categories as LookupType[]);
-      setBrands(brands as LookupType[]);
-      setSizes(sizes as LookupType[]);
+      setCategories(categories.documents as LookupType[]);
+      setBrands(brands.documents as LookupType[]);
+      setSizes(sizes.documents as LookupType[]);
     } catch (error) {
       console.error("Error fetching lookups:", error);
     }
@@ -117,6 +117,7 @@ const Page: React.FC = () => {
           <div className='w-full grid grid-cols-1 gap-4'>
             <Select
               name='category'
+              placeholder='Select category'
               value={product.category}
               onChange={(e) => handleChange(e)}
               required
@@ -143,17 +144,30 @@ const Page: React.FC = () => {
                 error=''
               />
             </div>
-            <Select
-              name='brand'
-              value={product.brand}
-              onChange={(e) => handleChange(e)}
-              required
-              error=''
-              options={brands}
-            />
+            <div className='grid grid-cols-2 gap-4 col-span-1'>
+              <Select
+                name='brand'
+                placeholder='Select brand'
+                value={product.brand}
+                onChange={(e) => handleChange(e)}
+                required
+                error=''
+                options={brands}
+              />
+              <Input
+                name='price'
+                placeholder='Price'
+                type='number'
+                value={product.price}
+                onChange={(e) => handleChange(e)}
+                required
+                error=''
+              />
+            </div>
             {product.category === "TV" && (
               <Select
                 name='size'
+                placeholder='Select size'
                 value={product.size}
                 onChange={(e) => handleChange(e)}
                 required
@@ -178,15 +192,7 @@ const Page: React.FC = () => {
               error=''
             />
             <Dropzone files={file} setFiles={setFile} />
-            <Input
-              name='price'
-              placeholder='Price'
-              type='number'
-              value={product.price}
-              onChange={(e) => handleChange(e)}
-              required
-              error=''
-            />
+
             <div className='flex gap-4 justify-end'>
               <Button
                 className='bg-gray-200 hover:bg-gray-300 !text-gray-800'

@@ -12,13 +12,13 @@ const Products: React.FC = () => {
   return (
     <section className='bg-gray-50 py-16 min-h-screen'>
       <div className='mx-auto sm:px-6 px-4 max-w-7xl'>
-        <div className='mx-auto text-center'>
+        <div className='mx-auto'>
           <h2 className='text-2xl font-bold text-gray-900 sm:text-3xl'>
-            {getTranslation("our_products", language)}
+            {getTranslation("all_products", language)}
           </h2>
         </div>
 
-        <ProductsList pageSize={12} />
+        <ProductsList pageSize={8} />
         <div className='flex w-full justify-center'>
           <Link
             href={Routes.ALL_PRODUCTS}

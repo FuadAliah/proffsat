@@ -1,10 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { Button, CircleLoading, Input, Textarea } from "./ui";
+import { Button, Input, Textarea } from "./ui";
 import { getTranslation } from "@/utils/translations";
 import { useLanguage } from "@/context/LanguageContext";
 import { addDocument } from "@/lib/http";
-import { MessageType } from "@/@interfaces/messages";
 
 type UserProps = {
   name: string;

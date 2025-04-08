@@ -12,7 +12,7 @@
 
   "back": "Back",
   "all_products": "All Products",
-  "our_products": "Our Products",
+  "special_products": "Special Products",
   "view_all": "View All",
   "currency": "JD",
 
@@ -21,5 +21,9 @@
   "phone": "Phone",
   "email": "Email",
   "message": "Message",
-  "send": "Send"
+  "send": "Send",
+  "send_success": "Your message has been sent successfully",
+
+  "load_more": "Load More",
+  "no_more": "No More Products"
 }

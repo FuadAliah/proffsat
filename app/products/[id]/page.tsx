@@ -12,6 +12,8 @@ import Link from "next/link";
 import { Routes } from "@/lib/routes";
 import { useLanguage } from "@/context/LanguageContext";
 import { getTranslation } from "@/utils/translations";
+import { Contacts } from "@/sections";
+import Footer from "@/components/core/Footer";
 
 type Props = {
   params: { id: string };
@@ -19,14 +21,13 @@ type Props = {
 
 const Page = ({ params }: Props) => {
   const [product, setProduct] = useState<ProductType | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { language } = useLanguage();
 
   // const mobile = "962795383168";
   const mobile = "962776968571";
 
   const getProduct = async () => {
-    setIsLoading(true);
     try {
       const doc = await getDocument("products", params.id);
       setProduct(doc as ProductType);
@@ -58,16 +59,14 @@ const Page = ({ params }: Props) => {
     );
   };
 
-  console.log("product", product);
-
   return (
     <div className='flex flex-col items-center min-h-screen bg-white'>
       <Header />
       <div className='my-30 relative flex flex-col gap-6'>
         {useLoading(isLoading, "white")}
-        <a
+        <Link
           href={Routes.HOME}
-          className='!flex gap-1 items-center w-fit px-4 py-2.5 bg-gray-100 text-gray-600 rounded-md'
+          className='flex gap-1 items-center w-fit ms-6 px-4 py-2.5 bg-gray-100 text-gray-600 rounded-md'
         >
           <Image
             src={`/${language === "en" ? "back" : "next"}Arrow.svg`}
@@ -76,8 +75,8 @@ const Page = ({ params }: Props) => {
             height={20}
           />
           <span>{getTranslation("back", language)}</span>
-        </a>
-        <div className='flex  gap-12 w-5xl '>
+        </Link>
+        <div className='flex gap-12 w-7xl sm:px-6 px-4'>
           <div className='flex md:w-1/2 w-1/2 h-100 justify-center items-center aspect-square overflow-hidden rounded-2xl p-3 border border-gray-200'>
             {product?.image ? (
               <Image src={product.image} alt='' priority={true} width={500} height={500} />
@@ -127,6 +126,12 @@ const Page = ({ params }: Props) => {
             </Link>
           </div>
         </div>
+      </div>
+      <div className='w-full flex flex-col'>
+        <div className='w-full bg-gray-50'>
+          <Contacts />
+        </div>
+        <Footer />
       </div>
     </div>
   );

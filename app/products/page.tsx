@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Containe from "@/components/core/Containe";
 import ProductsList from "@/components/ProductsList";
@@ -12,7 +11,7 @@ const Products: React.FC = () => {
         <div className='mx-auto sm:px-6 px-4 max-w-7xl'>
           <div className='flex flex-col'>
             <PageHeader pageTitle={"all_products"} />
-            <ProductsList />
+            <ProductsList showLoadButton={true} />
           </div>
         </div>
       </Containe>
