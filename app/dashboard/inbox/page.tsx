@@ -1,9 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MessageType } from "@/@interfaces/messages";
 import { getDocuments, updateDocument } from "@/lib/http";
 import List from "@/components/inbox/List";
-import { CircleLoading } from "@/components/ui";
 import Image from "next/image";
 import { formatRelativeTime } from "@/lib/utils";
 
@@ -27,7 +26,7 @@ const Page = () => {
     setLoading(true);
     try {
       const categories = await getDocuments("messages");
-      setMessages(categories as MessageType[]);
+      setMessages(categories.documents as MessageType[]);
     } catch (error) {
       throw new Error(`Failed to fetch categories ${error}`);
     }

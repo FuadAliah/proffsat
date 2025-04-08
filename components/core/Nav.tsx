@@ -9,6 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { getTranslation } from "@/utils/translations";
 import { Routes } from "@/lib/routes";
 import Image from "next/image";
+import NotificationBadge from "../NotificationBadge";
 
 export const getActiveClass = (route: string, pathname: string) =>
   pathname === route ? "bg-indigo-50 text-indigo-600" : "";
@@ -28,6 +29,17 @@ const Nav = () => {
   return (
     <div className='flex gap-20 items-center'>
       <ul className='flex gap-4 text-gray-600 text-sm h-full'>
+        {user && (
+          <li
+            className={`hover:text-indigo-600 rounded-sm ${
+              pathname.includes("dashboard") ? "bg-indigo-50 text-indigo-600" : ""
+            }`}
+          >
+            <Link className='flex py-2 px-3' href='/dashboard/products'>
+              Admin
+            </Link>
+          </li>
+        )}
         <li className={`hover:text-indigo-600 rounded-sm ${getActiveClass("/", pathname)}`}>
           <Link className='flex py-2 px-3' href={Routes.HOME}>
             {getTranslation("home", language)}
@@ -42,9 +54,10 @@ const Nav = () => {
       <div className='flex gap-4'>
         {user && (
           <Button
-            className='!px-2 !py-1 !bg-white !text-gray-500 font-bold text-sm border border-gray-100 !hover:bg-gray-100'
+            className='relative !px-2 !py-1 !bg-white !text-gray-500 font-bold text-sm border border-gray-100 !hover:bg-gray-100'
             onClick={() => router.push(Routes.MESSAGES)}
           >
+            <NotificationBadge />
             <Image src='/chat.svg' alt='' width={24} height={24} />
           </Button>
         )}

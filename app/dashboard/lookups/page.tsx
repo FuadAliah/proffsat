@@ -19,7 +19,7 @@ const Page: React.FC = () => {
     setLoadingCategories(true);
     try {
       const categories = await getDocuments("categories");
-      setCategories(categories as LookupType[]);
+      setCategories(categories.documents as LookupType[]);
     } catch (error) {
       throw new Error(`Failed to fetch categories ${error}`);
     }
@@ -30,7 +30,7 @@ const Page: React.FC = () => {
     setLoadingBrands(true);
     try {
       const brands = await getDocuments("brands");
-      setBrands(brands as LookupType[]);
+      setBrands(brands.documents as LookupType[]);
     } catch (error) {
       throw new Error(`Failed to fetch brands ${error}`);
     }
@@ -41,7 +41,7 @@ const Page: React.FC = () => {
     setLoadingSizes(true);
     try {
       const sizes = await getDocuments("sizes");
-      setSizes(sizes as LookupType[]);
+      setSizes(sizes.documents as LookupType[]);
     } catch (error) {
       throw new Error(`Failed to fetch sizes ${error}`);
     }

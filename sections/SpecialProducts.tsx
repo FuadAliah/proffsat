@@ -6,6 +6,7 @@ import { ProductType } from "@/@interfaces/product";
 import { FilterType } from "@/@interfaces/filteredAPI";
 import { getDocuments } from "@/lib/http";
 import Slider from "@/components/Slider";
+import useLoading from "@/hooks/useLoading";
 
 const SpecialProducts = () => {
   const { language } = useLanguage();
@@ -16,7 +17,7 @@ const SpecialProducts = () => {
   const fetchProducts = async () => {
     try {
       const docs = await getDocuments("products", "createdAt", { ...filters });
-      setProducts(docs as ProductType[]);
+      setProducts(docs.documents as ProductType[]);
     } catch (error) {
       throw new Error(`Failed to fetch products ${error}`);
     }
@@ -25,10 +26,12 @@ const SpecialProducts = () => {
 
   useEffect(() => {
     fetchProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <section className='bg-white py-16 h-auto'>
+    <section className='relative bg-white py-16 h-auto'>
+      {useLoading(loading)}
       <div className='mx-auto sm:px-6 px-4 max-w-7xl'>
         <div className='mx-auto'>
           <h2 className='text-2xl font-bold text-gray-900 sm:text-3xl'>

@@ -52,9 +52,9 @@ const Page: React.FC = () => {
         getDocuments("sizes"),
       ]);
 
-      setCategories(categories as LookupType[]);
-      setBrands(brands as LookupType[]);
-      setSizes(sizes as LookupType[]);
+      setCategories(categories.documents as LookupType[]);
+      setBrands(brands.documents as LookupType[]);
+      setSizes(sizes.documents as LookupType[]);
     } catch (error) {
       console.error("Error fetching lookups:", error);
     }

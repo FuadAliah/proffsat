@@ -12,7 +12,7 @@ const Card = ({ title, children, add }: Props) => {
       {/* Header */}
       <div className='flex justify-between items-center rounded-t-md bg-neutral-100 border-b border-gray-100 p-4'>
         <h4 className='font-bold'>{title}</h4>
-        <div className='fle'>{add}</div>
+        <div>{add}</div>
       </div>
       {/* Body */}
       <div className='w-full'>{children}</div>

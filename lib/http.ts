@@ -9,6 +9,8 @@ import {
   orderBy,
   query,
   where,
+  limit,
+  startAfter,
   QueryConstraint,
 } from "firebase/firestore";
 import { firestore } from "@/firebaseConfig";
@@ -17,18 +19,33 @@ import { FilterType } from "@/@interfaces/filteredAPI";
 export const getDocuments = async (
   collectionName: string,
   order: string = "createdAt",
-  filter?: FilterType
+  filter?: FilterType,
+  pageStart?: any, // Optional parameter for pagination
+  pageSize: number = 10 // Number of documents to fetch per page
 ) => {
   try {
     const colRef = collection(firestore, collectionName);
-    const constraints: QueryConstraint[] = [orderBy(order, "desc")];
+    const constraints: QueryConstraint[] = [orderBy(order, "desc"), limit(pageSize)];
 
     if (filter) {
       constraints.unshift(where(filter?.field, filter?.operator, filter?.value));
     }
+
+    if (pageStart) {
+      constraints.push(startAfter(pageStart));
+    }
+
     const qy = query(colRef, ...constraints);
     const snapshot = await getDocs(qy);
-    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+    if (snapshot.empty) {
+      return { documents: [], lastVisible: null };
+    }
+
+    const documents = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    const lastVisible = snapshot.docs[snapshot.docs.length - 1]; // Get the last document for pagination
+
+    return { documents, lastVisible }; // Return documents and the last visible document for the next page
   } catch (error) {
     throw new Error(`Error fetching documents: ${error}`);
   }

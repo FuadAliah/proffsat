@@ -54,6 +54,11 @@ html[lang="ar"] body {
   animation: rotation 1s linear infinite;
 }
 
+.loader.gray {
+  border: 3px solid #848484 !important;
+  border-bottom-color: transparent !important;
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);

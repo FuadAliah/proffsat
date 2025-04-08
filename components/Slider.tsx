@@ -23,7 +23,7 @@ const Slider = ({ data }: any) => {
       {data.map((slide: any) => (
         <SwiperSlide
           key={slide.id}
-          className='odd:bg-indigo-100 even:bg-amber-100 rounded-2xl overflow-hidden'
+          className='odd:bg-indigo-100 even:bg-orange-100 rounded-2xl overflow-hidden'
         >
           <div className='flex w-full h-full justify-between items-center p-6'>
             <div className='flex flex-col gap-6'>
