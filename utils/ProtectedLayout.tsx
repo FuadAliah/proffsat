@@ -17,11 +17,21 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   }, [user, loading, router]);
 
   if (loading) {
-    return <div className="relative">{<CircleLoading />}</div>;
+    return (
+      <div className="bg-gray-50 fixed inset-0">
+        <div className="w-screen h-screen">
+          <CircleLoading />
+        </div>
+      </div>
+    );
   }
 
   if (!user) {
-    return null;
+    return (
+      <div className="bg-gray-50 fixed inset-0 w-screen h-screen flex justify-center items-center">
+        <h3 className="text-gray-700">Redirecting...</h3>
+      </div>
+    );
   }
 
   return <>{children}</>;
