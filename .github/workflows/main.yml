@@ -19,19 +19,27 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Create .env.production
+      - name: ✅ Create .env.production (cleaned)
         run: |
-          echo "NEXT_PUBLIC_FIREBASE_API_KEY=${{secrets.NEXT_PUBLIC_FIREBASE_API_KEY}}" >> .env.production
-          echo "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${{secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}}" >> .env.production
-          echo "NEXT_PUBLIC_FIREBASE_PROJECT_ID=$(echo '${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}' | tr -d '\n' | tr -d '\r')" >> .env.production
-          echo "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${{secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}}" >> .env.production
-          echo "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${{secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID}}" >> .env.production
-          echo "NEXT_PUBLIC_FIREBASE_APP_ID=${{secrets.NEXT_PUBLIC_FIREBASE_APP_ID}}" >> .env.production
-          echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${{secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID}}" >> .env.production
+          echo "Writing .env.production with cleaned values..."
+          for var in NEXT_PUBLIC_FIREBASE_API_KEY NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN NEXT_PUBLIC_FIREBASE_PROJECT_ID NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID NEXT_PUBLIC_FIREBASE_APP_ID NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+          do
+            value=$(echo "${{ secrets[$var] }}" | tr -d '\n' | tr -d '\r')
+            echo "$var=$value" >> .env.production
+          done
+
+      - name: 🔍 Debug Secret - Project ID (safe)
+        run: |
+          echo "✅ Firebase Project ID from secret: '${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}'"
+
+      - name: 🔍 Debug .env.production file
+        run: |
+          echo "📦 Contents of .env.production (hiding sensitive keys)..."
+          grep -v "API_KEY\|APP_ID\|MEASUREMENT_ID" .env.production
 
       - name: Lint .env.production file
         run: |
-          echo "🔍 Linting .env.production..."
+          echo "🧪 Linting .env.production..."
           cat .env.production | while IFS= read -r line; do
             if [[ "$line" =~ ^[^#=]+=[^=]+$ ]]; then
               echo "✅ Valid: $line"
