@@ -34,6 +34,7 @@ const Page: React.FC = () => {
     }
   };
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     fetchData();
   }, []);

@@ -14,7 +14,7 @@ const SignOut: React.FC = () => {
 
   return (
     <Button
-      className='!px-4 !py-2 text-white bg-red-600 rounded-md shadow-sm hover:bg-red-700'
+      className='!px-4 !py-2 text-white bg-orange-700 rounded-md shadow-sm hover:bg-red-700'
       onClick={async () => {
         await signOut(auth);
         router.push(Routes.HOME);

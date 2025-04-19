@@ -11,8 +11,13 @@ import { Routes } from "@/lib/routes";
 import Image from "next/image";
 import NotificationBadge from "../NotificationBadge";
 
-export const getActiveClass = (route: string, pathname: string) =>
-  pathname === route ? "bg-indigo-50 text-indigo-600" : "";
+export const getActiveClass = (route: string, pathname: string) => {
+  return pathname === route ? "text-lime-600" : "";
+};
+
+export const linkColor = (route: string, pathname: string): string => {
+  return pathname !== route ? "!text-gray-500" : "!text-white";
+};
 
 export interface languageProps {
   language: string;
@@ -27,42 +32,61 @@ const Nav = () => {
   const router = useRouter();
 
   return (
-    <div className='flex gap-20 items-center'>
-      <ul className='flex gap-4 text-gray-600 text-sm h-full'>
+    <div className={`flex gap-20 items-center`}>
+      <ul className={`flex gap-8 ${linkColor("/", pathname)} text-sm h-full`}>
         {user && (
           <li
-            className={`hover:text-indigo-600 rounded-sm ${
-              pathname.includes("dashboard") ? "bg-indigo-50 text-indigo-600" : ""
+            className={`hover:text-gray-400 rounded-sm ${
+              pathname.includes("dashboard") ? "text-lime-600" : ""
             }`}
           >
-            <Link className='flex py-2 px-3' href='/dashboard/products'>
+            <Link className="flex py-2 px-3" href="/dashboard/products">
               Admin
             </Link>
           </li>
         )}
-        <li className={`hover:text-indigo-600 rounded-sm ${getActiveClass("/", pathname)}`}>
-          <Link className='flex py-2 px-3' href={Routes.HOME}>
+        <li
+          className={`hover:text-gray-400 rounded-sm ${getActiveClass(
+            "/",
+            pathname
+          )}`}
+        >
+          <Link className="flex py-2 px-3" href={Routes.HOME}>
             {getTranslation("home", language)}
           </Link>
         </li>
-        <li className={`hover:text-indigo-600 rounded-sm ${getActiveClass("/products", pathname)}`}>
-          <Link className='flex py-2 px-3' href={Routes.ALL_PRODUCTS}>
+        <li
+          className={`hover:text-gray-400 rounded-sm ${getActiveClass(
+            "/products",
+            pathname
+          )}`}
+        >
+          <Link className="flex py-2 px-3" href={Routes.ALL_PRODUCTS}>
             {getTranslation("products", language)}
           </Link>
         </li>
       </ul>
-      <div className='flex gap-4'>
+      <div className="flex gap-6">
         {user && (
           <Button
-            className='relative !px-2 !py-1 !bg-white !text-gray-500 font-bold text-sm border border-gray-100 !hover:bg-gray-100'
+            className="relative !px-2 !py-1 !bg-transparent font-bold text-sm !hover:bg-gray-100"
             onClick={() => router.push(Routes.MESSAGES)}
           >
             <NotificationBadge />
-            <Image src='/chat.svg' alt='' width={24} height={24} />
+            <Image
+              src="/chat.svg"
+              alt=""
+              width={24}
+              height={24}
+              className="mix-blend-lighten"
+            />
           </Button>
         )}
         <Button
-          className='!px-2 !py-1 !bg-white !text-gray-500 font-bold text-sm border border-gray-100 !hover:bg-gray-100'
+          className={`!px-2 !py-1 !bg-transparent ${linkColor(
+            "/",
+            pathname
+          )} font-bold text-sm`}
           onClick={() => changeLanguage(language === "en" ? "ar" : "en")}
         >
           {getTranslation("ar", language)}
@@ -70,7 +94,7 @@ const Nav = () => {
         {!user ? (
           <Link
             href={Routes.LOGIN}
-            className='px-4 py-2 text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700'
+            className="px-4 py-2 text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700"
           >
             {getTranslation("login", language)}
           </Link>
