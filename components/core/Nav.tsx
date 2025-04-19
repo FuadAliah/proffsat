@@ -15,25 +15,29 @@ export const getActiveClass = (route: string, pathname: string) => {
   return pathname === route ? "text-lime-600" : "";
 };
 
-export const linkColor = (route: string, pathname: string): string => {
-  return pathname !== route ? "!text-gray-500" : "!text-white";
-};
-
 export interface languageProps {
   language: string;
   changeLanguage: (lang: string) => void;
 }
 
-const Nav = () => {
+const Nav = ({ isScrolled }: { isScrolled: boolean }) => {
   const pathname = usePathname();
   const [user] = useAuthState(auth);
   const { language, changeLanguage }: languageProps = useLanguage();
 
   const router = useRouter();
 
+  const linkColor = (route: string, pathname: string): string => {
+    return pathname !== route && !isScrolled ? "!text-gray-500" : "!text-white";
+  };
+
   return (
     <div className={`flex gap-20 items-center`}>
-      <ul className={`flex gap-8 ${linkColor("/", pathname)} text-sm h-full`}>
+      <ul
+        className={`flex gap-8 ${linkColor("/", pathname)} ${
+          isScrolled ? "text-white" : ""
+        } text-sm h-full`}
+      >
         {user && (
           <li
             className={`hover:text-gray-400 rounded-sm ${

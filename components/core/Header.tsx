@@ -18,7 +18,7 @@ const Header = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   return (
     <header
@@ -41,7 +41,7 @@ const Header = () => {
             />
           </a>
         </div>
-        <Nav />
+        <Nav isScrolled={isScrolled} />
       </nav>
     </header>
   );
