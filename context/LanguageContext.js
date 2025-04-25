@@ -8,9 +8,8 @@ const languageSettings = {
   ar: { direction: "rtl", label: "عربي" },
 };
 
-// eslint-disable-next-line react/prop-types
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState("ar");
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem("language");
